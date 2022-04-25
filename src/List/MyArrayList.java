@@ -1,6 +1,7 @@
 package List;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 public class MyArrayList{
     private static final int DEFAULT_CAPACITY = 10;
@@ -56,6 +57,7 @@ public class MyArrayList{
     }
 
     public Object get(int index){
+        Objects.checkIndex(index, size);
         return elementData[index];
     }
 
@@ -133,7 +135,7 @@ public class MyArrayList{
 
 
     public Object[] toArray() {
-        return elementData;
+        return Arrays.copyOf(elementData,size);
     }
 
 
@@ -153,6 +155,6 @@ public class MyArrayList{
 
     @Override
     public String toString() {
-        return Arrays.toString(elementData);
+        return Arrays.toString(Arrays.copyOf(elementData, size));
     }
 }

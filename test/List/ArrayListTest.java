@@ -69,7 +69,7 @@ class ArrayListTest {
         System.out.println(arrayList.toString());
 
         assertEquals(1, arrayList.get(0));
-        assertEquals(null, arrayList.get(5));
+        assertThrows(Exception.class,() -> arrayList.get(5));
 
         arrayList.add(6);
         assertEquals(6, arrayList.get(5));
@@ -143,22 +143,17 @@ class ArrayListTest {
     @Test
     public void ensureCapacity(){
         ArrayList arrayList = new ArrayList();
-        for (int i = 0; i < 10; i++) {
+        int size = 10;
+        for (int i = 0; i < size; i++) {
             arrayList.add(i);
         }
 
-        int minCapacity = 20;
+        int minCapacity = size * 2;
         arrayList.ensureCapacity(20);
         Object[] myArray = arrayList.toArray();
 
-        System.out.println(arrayList.toString());
-        assertEquals(minCapacity, myArray.length);
-
-        Object[] objects = Arrays.copyOf(myArray, minCapacity);
-        for (int i = 0; i < objects.length; i++) {
-            System.out.print(objects[i] + ", ");
-        }
-        assertEquals(minCapacity, objects.length);
+        System.out.println(myArray.toString());
+        assertEquals(size, myArray.length);
 
     }
 
