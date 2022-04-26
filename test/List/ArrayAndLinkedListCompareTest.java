@@ -100,6 +100,45 @@ public class ArrayAndLinkedListCompareTest {
 
 
 
+    @Test
+    public void getTest(){
+        List<String> arrayList = new ArrayList<>();
+        List<String> linkedList = new LinkedList<>();
+        int caseNumber = 100000;
+
+        addAsc(arrayList, caseNumber);
+        addAsc(linkedList, caseNumber);
+
+        //순차 조회
+        System.out.println("getAsc(arrayList)   :: "+getAsc(arrayList));
+        System.out.println("getAsc(linkedList)  :: "+getAsc(linkedList));
+
+        System.out.println();
+
+
+        //역차 조회
+        System.out.println("getDesc(arrayList)  :: "+getDesc(arrayList));
+        System.out.println("getDesc(linkedList) :: "+getDesc(linkedList));
+
+        System.out.println();
+
+        //순차 조회
+        System.out.println("getRandom(arrayList)    :: "+getRandom(arrayList));
+        System.out.println("getRandom(linkedList)   :: "+getRandom(linkedList));
+
+
+    }
+    /**
+     * getAsc(arrayList)   :: 5
+     * getAsc(linkedList)  :: 4413
+     *
+     * getDesc(arrayList)  :: 3
+     * getDesc(linkedList) :: 4492
+     *
+     * getRandom(arrayList)    :: 7
+     * getRandom(linkedList)   :: 4871
+     */
+
 
 
     private long getRandom(List list) {
