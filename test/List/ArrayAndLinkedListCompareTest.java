@@ -56,6 +56,52 @@ public class ArrayAndLinkedListCompareTest {
 
 
 
+    @Test
+    public void compareRemoveTest(){
+        List<String> arrayList = new ArrayList<>();
+        List<String> linkedList = new LinkedList<>();
+        int caseNumber = 100000;
+
+
+        //순차 삭제
+        addAsc(arrayList, caseNumber);
+        addDesc(linkedList, caseNumber);
+        System.out.println("removeAsc(arrayList)    :: "+removeAsc(arrayList));
+        System.out.println("removeAsc(linkedList)   :: "+removeAsc(linkedList));
+
+        System.out.println();
+
+
+        //역순 삭제
+        addAsc(arrayList, caseNumber);
+        addDesc(linkedList, caseNumber);
+        System.out.println("removeDesc(arrayList)   :: "+removeDesc(arrayList));
+        System.out.println("removeDesc(linkedList)  :: "+removeDesc(linkedList));
+
+        System.out.println();
+
+        //랜덤 삭제
+        addAsc(arrayList, caseNumber);
+        addDesc(linkedList, caseNumber);
+        System.out.println("removeRandom(arrayList)     :: "+removeRandom(arrayList));
+        System.out.println("removeRandom(linkedList)    :: "+removeRandom(linkedList));
+
+    }
+    /**
+     * removeAsc(arrayList)    :: 519
+     * removeAsc(linkedList)   :: 3
+     *
+     * removeDesc(arrayList)   :: 5
+     * removeDesc(linkedList)  :: 4
+     *
+     * removeRandom(arrayList)     :: 797
+     * removeRandom(linkedList)    :: 11459
+     */
+
+
+
+
+
     private long getRandom(List list) {
         long startTime = System.currentTimeMillis();
         Random random = new Random();
