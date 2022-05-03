@@ -1,5 +1,7 @@
 package List;
 
+import java.util.NoSuchElementException;
+
 public class MyLinkedList<E> {
     private int size;
     private Node<E> first;
@@ -91,14 +93,18 @@ public class MyLinkedList<E> {
         if(index >= size || index < 0) throw new IndexOutOfBoundsException();
     }
 
-    public E getFirst(int index){
-        checkIndexRange(index);
+    public E getFirst(){
+        checkHasElement();
         return first.item;
     }
 
-    public E getLast(int index){
-        checkIndexRange(index);
+    public E getLast(){
+        checkHasElement();
         return last.item;
+    }
+
+    private void checkHasElement() {
+        if(size < 1) throw new NoSuchElementException();
     }
 
     public int indexOf(E element){
@@ -122,40 +128,81 @@ public class MyLinkedList<E> {
     public E remove(int index){
         checkIndexRange(index);
         Node<E> indexNode = node(index);
-        Node<E> nextNode = indexNode.next;
-        Node<E> prevNode = indexNode.prev;
-
-        nextNode.prev = prevNode;
-        prevNode.next = nextNode;
-
+        unLink(indexNode);
         return indexNode.item;
     }
 
+
+
     public boolean remove(E element){
-        return true;
+        checkHasElement();
+        Node<E> indexNode = first;
+        if(element == null){
+            for (int i = 0; i < size; i++) {
+                if(indexNode.item == null){
+                    unLink(indexNode);
+                    return true;
+                }
+                indexNode = indexNode.next;
+            }
+        }else{
+            for (int i = 0; i < size; i++) {
+                if(element.equals(indexNode.item)){
+                    unLink(indexNode);
+                    return true;
+                }
+                indexNode = indexNode.next;
+            }
+        }
+        return false;
     }
 
     public E removeFirst(){
-        return null;
+        checkHasElement();
+        Node<E> firstNode = first;
+        unLink(firstNode);
+        return firstNode.item;
     }
 
     public E removeLast(){
-        return null;
+        checkHasElement();
+        Node<E> lastNode = last;
+        unLink(lastNode);
+        return lastNode.item;
     }
 
     public E set(int index, E element){
-        return null;
+        checkIndexRange(index);
+        Node<E> indexNode = node(index);
+        E originElement = indexNode.item;
+        indexNode.item = element;
+
+        return originElement;
     }
 
     public int size(){
         return size;
     }
 
-    public E[] 	toArray(){
-        return null;
+    private void unLink(Node<E> node) {
+
+        Node<E> nextNode = node.next;
+        Node<E> prevNode = node.prev;
+
+        if(nextNode == null){
+            last = node.prev;
+        }else{
+            nextNode.prev = prevNode;
+        }
+
+        if(prevNode == null){
+            first = node.next;
+        }else {
+            prevNode.next = nextNode;
+        }
+
+        size--;
     }
-
-
 
     private static class Node<E>{
         E item;
