@@ -2,10 +2,7 @@ package List;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class ArrayAndLinkedListCompareTest {
 
@@ -115,6 +112,12 @@ public class ArrayAndLinkedListCompareTest {
 
         System.out.println();
 
+        //iterator 조회
+        System.out.println("getAscIterator (arrayList)   :: "+getAscIterator(arrayList));
+        System.out.println("getAscIterator(linkedList)  :: "+getAscIterator(linkedList));
+
+        System.out.println();
+
 
         //역차 조회
         System.out.println("getDesc(arrayList)  :: "+getDesc(arrayList));
@@ -128,6 +131,9 @@ public class ArrayAndLinkedListCompareTest {
 
 
     }
+
+
+
     /**
      * getAsc(arrayList)   :: 5
      * getAsc(linkedList)  :: 4413
@@ -168,7 +174,17 @@ public class ArrayAndLinkedListCompareTest {
         return System.currentTimeMillis() - startTime;
     }
 
-    private long removeRandom(List list) {
+    private long getAscIterator(List<String> list) {
+        long startTime = System.currentTimeMillis();
+        Iterator<String> iterator = list.iterator();
+        while (iterator.hasNext()) {
+            String next = iterator.next();
+        }
+        return System.currentTimeMillis() - startTime;
+
+    }
+
+    private long removeRandom(List<String> list) {
         long startTime = System.currentTimeMillis();
         Random random = new Random();
         int randomIndex;
@@ -179,7 +195,7 @@ public class ArrayAndLinkedListCompareTest {
         return System.currentTimeMillis() - startTime;
     }
 
-    private long removeDesc(List list) {
+    private long removeDesc(List<String> list) {
 
         long startTime = System.currentTimeMillis();
         for (int i = 0; i < list.size(); i++) {
@@ -188,7 +204,7 @@ public class ArrayAndLinkedListCompareTest {
         return System.currentTimeMillis() - startTime;
     }
 
-    private long removeAsc(List list) {
+    private long removeAsc(List<String> list) {
         long startTime = System.currentTimeMillis();
         for (int i = 0; i < list.size(); i++) {
             list.remove(0);
@@ -197,44 +213,44 @@ public class ArrayAndLinkedListCompareTest {
     }
 
 
-    private long addRandom(List list, int caseNumber) {
+    private long addRandom(List<String> list, int caseNumber) {
         long startTime = System.currentTimeMillis();
         Random random = new Random();
         int randomIndex;
         for (int i = 0; i < caseNumber; i++) {
             randomIndex = random.nextInt(list.size());
-            list.add(randomIndex,i);
+            list.add(randomIndex,""+i);
         }
         return System.currentTimeMillis() - startTime;
     }
 
 
 
-    private long addDesc(List list, int caseNumber) {
+    private long addDesc(List<String> list, int caseNumber) {
 
         long startTime = System.currentTimeMillis();
         for (int i = 0; i < caseNumber; i++) {
-            list.add(0,i);
+            list.add(0,""+i);
         }
         return System.currentTimeMillis() - startTime;
     }
 
-    private long addInMiddle(List list , int caseNumber) {
+    private long addInMiddle(List<String> list , int caseNumber) {
         int midIndex;
 
         long startTime = System.currentTimeMillis();
         for (int i = 0; i < caseNumber; i++) {
             midIndex = list.size()/2;
-            list.add(midIndex,i);
+            list.add(midIndex,""+i);
         }
         return System.currentTimeMillis() - startTime;
     }
 
-    private long addAsc(List list, int caseNumber) {
+    private long addAsc(List<String> list, int caseNumber) {
 
         long startTime = System.currentTimeMillis();
         for (int i = 0; i < caseNumber; i++) {
-            list.add(i);
+            list.add(""+i);
         }
         return System.currentTimeMillis() - startTime;
     }
