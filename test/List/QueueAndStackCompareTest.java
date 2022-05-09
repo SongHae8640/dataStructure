@@ -109,7 +109,7 @@ public class QueueAndStackCompareTest {
             dequeue.remove();
         }
         endTime.set(System.currentTimeMillis() - startTime.get());
-        System.out.println("dequeue remove running time = "+ endTime);
+        System.out.println("dequeue remove(removeFirst) running time = "+ endTime);
 
         //
 
@@ -119,7 +119,7 @@ public class QueueAndStackCompareTest {
             dequeue.poll();
         }
         endTime.set(System.currentTimeMillis() - startTime.get());
-        System.out.println("dequeue poll running time = "+ endTime);
+        System.out.println("dequeue poll(pollFirst) running time = "+ endTime);
 
         //
         System.out.println();
@@ -128,20 +128,20 @@ public class QueueAndStackCompareTest {
         addData(dequeue, dataCount);
         startTime.set(System.currentTimeMillis());
         for (int i = 0; i < dataCount; i++) {
-            dequeue.removeFirst();
+            dequeue.removeLast();
         }
         endTime.set(System.currentTimeMillis() - startTime.get());
-        System.out.println("dequeue removeFirst running time = "+ endTime);
+        System.out.println("dequeue removeLast running time = "+ endTime);
 
         //
 
         addData(dequeue, dataCount);
         startTime.set(System.currentTimeMillis());
         for (int i = 0; i < dataCount; i++) {
-            dequeue.pollFirst();
+            dequeue.pollLast();
         }
         endTime.set(System.currentTimeMillis() - startTime.get());
-        System.out.println("dequeue pollFirst running time = "+ endTime);
+        System.out.println("dequeue pollLast running time = "+ endTime);
 
         //
 
@@ -158,14 +158,14 @@ public class QueueAndStackCompareTest {
     }
     /**
      * dataCount = 50000000
-     * queue remove running time = 1021
-     * queue poll running time = 1972
-     * dequeue remove running time = 367
-     * dequeue poll running time = 191
+     * queue remove running time = 1288
+     * queue poll running time = 2302
+     * dequeue remove(removeFirst) running time = 424
+     * dequeue poll(pollFirst) running time = 151
      *
-     * dequeue removeFirst running time = 356
-     * dequeue pollFirst running time = 212
-     * stack pop running time = 262
+     * dequeue removeLast running time = 411
+     * dequeue pollLast running time = 305
+     * stack pop running time = 398
      */
 
     private void addData(Queue<Integer> queue, int dataCount) {
