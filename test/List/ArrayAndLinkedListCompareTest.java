@@ -7,33 +7,33 @@ import java.util.*;
 public class ArrayAndLinkedListCompareTest {
 
     @Test
-    public void compareAddTest(){
+    public void compareAddTest() {
         List<String> arrayList = new ArrayList<>();
         List<String> linkedList = new LinkedList<>();
-        int caseNumber = 100000;
+        int caseNumber = 10000000;
 
 
         //순차 추가
-        System.out.println("addAsc(arrayList)   :: "+addAsc(arrayList, caseNumber));
-        System.out.println("addAsc(linkedList)  :: "+addAsc(linkedList, caseNumber));
+        System.out.println("addAsc(arrayList)   :: " + addAsc(arrayList, caseNumber));
+        System.out.println("addAsc(linkedList)  :: " + addAsc(linkedList, caseNumber));
 
         System.out.println();
 
         //중간 추가
-        System.out.println("addInMiddle(arrayList)  :: "+addInMiddle(arrayList, caseNumber));
-        System.out.println("addInMiddle(linkedList) :: "+addInMiddle(linkedList, caseNumber));
+        System.out.println("addInMiddle(arrayList)  :: " + addInMiddle(arrayList, caseNumber));
+        System.out.println("addInMiddle(linkedList) :: " + addInMiddle(linkedList, caseNumber));
 
         System.out.println();
 
         //역순 추가
-        System.out.println("addDesc(arrayList)  :: "+addDesc(arrayList, caseNumber));
-        System.out.println("addDesc(linkedList) :: "+addDesc(linkedList, caseNumber));
+        System.out.println("addDesc(arrayList)  :: " + addDesc(arrayList, caseNumber));
+        System.out.println("addDesc(linkedList) :: " + addDesc(linkedList, caseNumber));
 
         System.out.println();
 
         //랜덤 추가
-        System.out.println("addRandom(arrayList)    :: "+addRandom(arrayList, caseNumber));
-        System.out.println("addRandom(linkedList)   :: "+addRandom(linkedList, caseNumber));
+        System.out.println("addRandom(arrayList)    :: " + addRandom(arrayList, caseNumber));
+        System.out.println("addRandom(linkedList)   :: " + addRandom(linkedList, caseNumber));
 
 
     }
@@ -112,7 +112,7 @@ public class ArrayAndLinkedListCompareTest {
 
         System.out.println();
 
-        //iterator 조회
+        //iterator 순차 조회
         System.out.println("getAscIterator (arrayList)   :: "+getAscIterator(arrayList));
         System.out.println("getAscIterator(linkedList)  :: "+getAscIterator(linkedList));
 
@@ -122,6 +122,12 @@ public class ArrayAndLinkedListCompareTest {
         //역차 조회
         System.out.println("getDesc(arrayList)  :: "+getDesc(arrayList));
         System.out.println("getDesc(linkedList) :: "+getDesc(linkedList));
+
+        System.out.println();
+
+        //iterator 역차 조회
+        System.out.println("getDescIterator (arrayList)   :: "+getDescIterator(arrayList));
+        System.out.println("getDescIterator(linkedList)  :: "+getDescIterator(linkedList));
 
         System.out.println();
 
@@ -135,14 +141,22 @@ public class ArrayAndLinkedListCompareTest {
 
 
     /**
-     * getAsc(arrayList)   :: 5
-     * getAsc(linkedList)  :: 4413
+     * getAsc(arrayList)   :: 7
+     * getAsc(linkedList)  :: 10553
      *
-     * getDesc(arrayList)  :: 3
-     * getDesc(linkedList) :: 4492
+     * getAscIterator (arrayList)   :: 4
+     * getAscIterator(linkedList)  :: 4
      *
-     * getRandom(arrayList)    :: 7
-     * getRandom(linkedList)   :: 4871
+     * getDesc(arrayList)  :: 2
+     * getDesc(linkedList) :: 10335
+     *
+     * getDescIterator (arrayList)   :: 5
+     * getDescIterator(linkedList)  :: 5
+     *
+     * getRandom(arrayList)    :: 9
+     * getRandom(linkedList)   :: 15035
+     *
+     * Process finished with exit code 0
      */
 
 
@@ -164,6 +178,16 @@ public class ArrayAndLinkedListCompareTest {
             list.get(i);
         }
         return System.currentTimeMillis() - startTime;
+    }
+
+    private long getDescIterator(List<String> list) {
+        long startTime = System.currentTimeMillis();
+        ListIterator<String> iterator = list.listIterator(list.size());
+        while (iterator.hasPrevious()) {
+            String previous = iterator.previous();
+        }
+        return System.currentTimeMillis() - startTime;
+
     }
 
     private long getAsc(List list) {
@@ -245,6 +269,7 @@ public class ArrayAndLinkedListCompareTest {
         }
         return System.currentTimeMillis() - startTime;
     }
+
 
     private long addAsc(List<String> list, int caseNumber) {
 
