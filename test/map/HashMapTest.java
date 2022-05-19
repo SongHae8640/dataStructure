@@ -2,15 +2,16 @@ package map;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.HashMap;
 import java.util.Random;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class MyHashMapTest {
+public class HashMapTest {
     
     @Test
     public void putAndGetTest(){
-        MyHashMap hashMap = new MyHashMap();
+        HashMap hashMap = new HashMap();
         int dataCount = 20;
         for (int i = 0; i < dataCount; i++) {
             hashMap.put(""+i, "" + i*2);
@@ -24,7 +25,7 @@ class MyHashMapTest {
 
     @Test
     public void containsKeyTest(){
-        MyHashMap hashMap = new MyHashMap();
+        HashMap hashMap = new HashMap();
         int dataCount = 10;
         for (int i = 0; i < dataCount; i++) {
             hashMap.put(""+i, "" + i*2);
@@ -47,7 +48,7 @@ class MyHashMapTest {
 
     @Test
     public void containsValueTest(){
-        MyHashMap hashMap = new MyHashMap();
+        HashMap hashMap = new HashMap();
         int dataCount = 10;
         for (int i = 0; i < dataCount; i++) {
             hashMap.put(""+i, "" + i*2);
@@ -69,7 +70,7 @@ class MyHashMapTest {
 
     @Test
     public void isEmptyTest(){
-        MyHashMap hashMap = new MyHashMap();
+        HashMap hashMap = new HashMap();
         assertEquals(true , hashMap.isEmpty());
 
     }
@@ -77,7 +78,7 @@ class MyHashMapTest {
 
     @Test
     public void removeTest(){
-        MyHashMap hashMap = new MyHashMap();
+        HashMap hashMap = new HashMap();
         int dataCount = 10;
         for (int i = 0; i < dataCount; i++) {
             hashMap.put(""+i, "" + i);
@@ -93,7 +94,7 @@ class MyHashMapTest {
 
     @Test
     public void sizeTest(){
-        MyHashMap hashMap = new MyHashMap();
+        HashMap hashMap = new HashMap();
 
         int dataCount = 10;
         for (int i = 0; i < dataCount; i++) {

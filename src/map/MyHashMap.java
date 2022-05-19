@@ -8,6 +8,7 @@ public class MyHashMap {
 
     private LinkedList<Node>[] table;
     private int capacity;
+    private int size;
 
     public MyHashMap() {
         this(DEFAULT_CAPACITY);
@@ -16,6 +17,7 @@ public class MyHashMap {
     public MyHashMap(int capacity){
         this.capacity = capacity;
         this.table = new LinkedList[capacity];
+        this.size = 0;
     }
 
     static class Node{
@@ -102,13 +104,19 @@ public class MyHashMap {
             if(node.key.equals(key)) {
                 String oldValue= node.value;
                 list.remove(node);
+                size--;
                 return oldValue;
             }
         }
         return null;
     }
 
+    public int size(){
+        return size;
+    }
+
     private String addNode(LinkedList<Node> nodes, Node newNode) {
+        size++;
         for (Node oldNode: nodes) {
             if(oldNode.key.equals(newNode.key)){
                 String oldValue = (String) oldNode.value;
@@ -122,7 +130,7 @@ public class MyHashMap {
     }
 
     private int getTableIndex(String key) {
-        return Math.abs(key.hashCode()) % capacity;
+        return (key ==null) ? 0 : Math.abs(key.hashCode()) % capacity;
     }
 
 
