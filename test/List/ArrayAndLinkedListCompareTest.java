@@ -10,45 +10,60 @@ public class ArrayAndLinkedListCompareTest {
     public void compareAddTest() {
         List<String> arrayList = new ArrayList<>();
         List<String> linkedList = new LinkedList<>();
-        int caseNumber = 10000000;
+        int initListSize = 100000;
+        int addNumber = 50000;
 
 
         //순차 추가
-        System.out.println("addAsc(arrayList)   :: " + addAsc(arrayList, caseNumber));
-        System.out.println("addAsc(linkedList)  :: " + addAsc(linkedList, caseNumber));
+        addAsc(arrayList, initListSize);
+        addAsc(linkedList, initListSize);
+        System.out.println("addAsc(arrayList)   :: " + addAsc(arrayList, addNumber));
+        System.out.println("addAsc(linkedList)  :: " + addAsc(linkedList, addNumber));
+        arrayList.clear();
+        linkedList.clear();
 
         System.out.println();
 
         //중간 추가
-        System.out.println("addInMiddle(arrayList)  :: " + addInMiddle(arrayList, caseNumber));
-        System.out.println("addInMiddle(linkedList) :: " + addInMiddle(linkedList, caseNumber));
+        addAsc(arrayList, initListSize);
+        addAsc(linkedList, initListSize);
+        System.out.println("addInMiddle(arrayList)  :: " + addInMiddle(arrayList, addNumber));
+        System.out.println("addInMiddle(linkedList) :: " + addInMiddle(linkedList, addNumber));
+        arrayList.clear();
+        linkedList.clear();
 
         System.out.println();
 
         //역순 추가
-        System.out.println("addDesc(arrayList)  :: " + addDesc(arrayList, caseNumber));
-        System.out.println("addDesc(linkedList) :: " + addDesc(linkedList, caseNumber));
+        addAsc(arrayList, initListSize);
+        addAsc(linkedList, initListSize);
+        System.out.println("addDesc(arrayList)  :: " + addDesc(arrayList, addNumber));
+        System.out.println("addDesc(linkedList) :: " + addDesc(linkedList, addNumber));
+        arrayList.clear();
+        linkedList.clear();
 
         System.out.println();
 
         //랜덤 추가
-        System.out.println("addRandom(arrayList)    :: " + addRandom(arrayList, caseNumber));
-        System.out.println("addRandom(linkedList)   :: " + addRandom(linkedList, caseNumber));
+        addAsc(arrayList, initListSize);
+        addAsc(linkedList, initListSize);
+        System.out.println("addRandom(arrayList)    :: " + addRandom(arrayList, addNumber));
+        System.out.println("addRandom(linkedList)   :: " + addRandom(linkedList, addNumber));
 
 
     }
     /**
-     * addAsc(arrayList)   :: 8
-     * addAsc(linkedList)  :: 5
+     * addAsc(arrayList)   :: 5
+     * addAsc(linkedList)  :: 4
      *
-     * addInMiddle(arrayList)  :: 1028
-     * addInMiddle(linkedList) :: 25473
+     * addInMiddle(arrayList)  :: 564
+     * addInMiddle(linkedList) :: 41330
      *
-     * addDesc(arrayList)  :: 3567
-     * addDesc(linkedList) :: 6
+     * addDesc(arrayList)  :: 1425
+     * addDesc(linkedList) :: 7
      *
-     * addRandom(arrayList)    :: 2552
-     * addRandom(linkedList)   :: 64172
+     * addRandom(arrayList)    :: 635
+     * addRandom(linkedList)   :: 39824
      */
 
 
@@ -65,6 +80,14 @@ public class ArrayAndLinkedListCompareTest {
         addDesc(linkedList, caseNumber);
         System.out.println("removeAsc(arrayList)    :: "+removeAsc(arrayList));
         System.out.println("removeAsc(linkedList)   :: "+removeAsc(linkedList));
+
+        System.out.println();
+
+        //중간 삭제
+        addAsc(arrayList, caseNumber);
+        addDesc(linkedList, caseNumber);
+        System.out.println("removeInMiddle(arrayList)   :: "+removeInMiddle(arrayList));
+        System.out.println("removeInMiddle(linkedList)  :: "+removeInMiddle(linkedList));
 
         System.out.println();
 
@@ -85,14 +108,17 @@ public class ArrayAndLinkedListCompareTest {
 
     }
     /**
-     * removeAsc(arrayList)    :: 519
+     * removeAsc(arrayList)    :: 502
      * removeAsc(linkedList)   :: 3
      *
-     * removeDesc(arrayList)   :: 5
-     * removeDesc(linkedList)  :: 4
+     * removeInMiddle(arrayList)   :: 521
+     * removeInMiddle(linkedList)  :: 28571
      *
-     * removeRandom(arrayList)     :: 797
-     * removeRandom(linkedList)    :: 11459
+     * removeDesc(arrayList)   :: 6
+     * removeDesc(linkedList)  :: 5
+     *
+     * removeRandom(arrayList)     :: 830
+     * removeRandom(linkedList)    :: 28464
      */
 
 
@@ -118,7 +144,6 @@ public class ArrayAndLinkedListCompareTest {
 
         System.out.println();
 
-
         //역차 조회
         System.out.println("getDesc(arrayList)  :: "+getDesc(arrayList));
         System.out.println("getDesc(linkedList) :: "+getDesc(linkedList));
@@ -131,15 +156,10 @@ public class ArrayAndLinkedListCompareTest {
 
         System.out.println();
 
-        //순차 조회
+        //랜덤 조회
         System.out.println("getRandom(arrayList)    :: "+getRandom(arrayList));
         System.out.println("getRandom(linkedList)   :: "+getRandom(linkedList));
-
-
     }
-
-
-
     /**
      * getAsc(arrayList)   :: 7
      * getAsc(linkedList)  :: 10553
@@ -155,8 +175,6 @@ public class ArrayAndLinkedListCompareTest {
      *
      * getRandom(arrayList)    :: 9
      * getRandom(linkedList)   :: 15035
-     *
-     * Process finished with exit code 0
      */
 
 
@@ -224,6 +242,16 @@ public class ArrayAndLinkedListCompareTest {
         long startTime = System.currentTimeMillis();
         for (int i = 0; i < list.size(); i++) {
             list.remove(list.size()-1);
+        }
+        return System.currentTimeMillis() - startTime;
+    }
+
+    private long removeInMiddle(List<String> list) {
+        int midIndex;
+        long startTime = System.currentTimeMillis();
+        for (int i = 0; i < list.size(); i++) {
+            midIndex = list.size()/2;
+            list.remove(midIndex);
         }
         return System.currentTimeMillis() - startTime;
     }
