@@ -6,77 +6,99 @@ public class BinarySearchTree {
     public BinarySearchTree() {
         root = null;
     }
-    public Node insertNode(int key){
-        Node newNode = new Node(key);
-        if (root == null){
-            root = newNode;
-            return root;
+
+    public void insertValue(int value) {
+        root = insertRecursive(root, value);
+    }
+
+    public Node insertRecursive(Node currentNode, int value){
+        if (currentNode == null){
+            return new Node(value);
         }
 
-        Node current = root;
-        Node parent;
-        while (true){
-            parent = current;
-            if (key < current.getKey()){
-                current = current.getLeft();
-                if (current == null){
-                    parent.setLeft(newNode);
-                    return newNode;
-                }
-            } else {
-                current = current.getRight();
-                if (current == null){
-                    parent.setRight(newNode);
-                    return newNode;
-                }
-            }
+        if(value < currentNode.value){
+            currentNode.left = insertRecursive(currentNode.left, value);
+        } else if (value > currentNode.value) {
+            currentNode.right = insertRecursive(currentNode.right, value);
         }
+        return currentNode;
     }
+
 
     public String toString(){
         StringBuilder sb = new StringBuilder();
         sb.append("[");
-        preOrder(root, sb);
+        inOrder(root, sb);
         sb.append("]");
         return sb.toString();
     }
 
-    private void preOrder(Node root, StringBuilder sb) {
+    private void inOrder(Node root, StringBuilder sb) {
         if (root == null){
             return;
         }
-        sb.append(root.getKey());
+        inOrder(root.getLeft(), sb);
+        sb.append(root.getValue());
         sb.append(", ");
-        preOrder(root.getLeft(), sb);
-        preOrder(root.getRight(), sb);
+        inOrder(root.getRight(), sb);
+    }
+
+
+
+    public boolean containsValue(int value) {
+        return containsRecursive(root, value);
+    }
+
+    private boolean containsRecursive(Node currentNode, int value) {
+        if(currentNode == null) return false;
+
+        if(value < currentNode.value){
+            return containsRecursive(currentNode.left, value);
+        }
+        else if(value > currentNode.value){
+            return containsRecursive(currentNode.right, value);
+        }
+
+        return true;
+    }
+
+    public void deleteValue(int value) {
+        deleteRecursive(root, value);
+    }
+
+
+    public Node deleteRecursive(Node currentNode, int value){
+        if (currentNode == null){
+            return null;
+        }
+
+        if(value < currentNode.value){
+            currentNode.left = deleteRecursive(currentNode.left, value);
+        } else if (value > currentNode.value) {
+            currentNode.right = deleteRecursive(currentNode.right, value);
+        }
+        return currentNode;
     }
 
     private class Node {
-        int key;
+        int value;
         Node left, right;
 
-        public Node(int key) {
-            this.key = key;
+        public Node(int value) {
+            this.value = value;
         }
 
-        public int getKey() {
-            return key;
+        public int getValue() {
+            return value;
         }
 
         public Node getLeft() {
             return left;
         }
 
-        public void setLeft(Node left) {
-            this.left = left;
-        }
-
         public Node getRight() {
             return right;
         }
 
-        public void setRight(Node right) {
-            this.right = right;
-        }
     }
 }
